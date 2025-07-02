@@ -319,7 +319,7 @@
             "type": "object",
             "defaultValue": {},
             "metadata": {
-                "description": "${label.tagsLabel}"
+                "description": "Tags for the resources."
             }
         },
         "usePreviewImage": {
@@ -530,21 +530,21 @@
         // If adding a new resource, add the resource identifier to the array below
         // Also modify createUIDefinition.json to include the new resource
         "obj_tagsByResources": {
-            "${identifier.applicationGateways}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.applicationGateways}')]",
-            "${identifier.availabilitySets}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.availabilitySets}')]",
-            "${identifier.dnszones}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.dnszones}')]",
-            "${identifier.networkInterfaces}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.networkInterfaces}')]",
-            "${identifier.networkSecurityGroups}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.networkSecurityGroups}')]",
-            "${identifier.publicIPAddresses}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.publicIPAddresses}')]",
-            "${identifier.privateEndpoints}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.privateEndpoints}')]",
-            "${identifier.storageAccounts}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.storageAccounts}')]",
-            "${identifier.vaults}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.vaults}')]",
-            "${identifier.virtualNetworks}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.virtualNetworks}')]",
-            "${identifier.virtualMachines}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.virtualMachines}')]",
-            "${identifier.virtualMachinesExtensions}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.virtualMachinesExtensions}')]",
-            "${identifier.deploymentScripts}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.deploymentScripts}')]",
-            "${identifier.userAssignedIdentities}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.userAssignedIdentities}')]",
-            "${identifier.resourcesDeployment}": "[funcTags.tagsFilter(parameters('tagsByResource'), '${identifier.resourcesDeployment}')]"
+            "Microsoft.Network/applicationGateways": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Network/applicationGateways')]",
+            "Microsoft.Compute/availabilitySets": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Compute/availabilitySets')]",
+            "Microsoft.Network/dnszones": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Network/dnszones')]",
+            "Microsoft.Network/networkInterfaces": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Network/networkInterfaces')]",
+            "Microsoft.Network/networkSecurityGroups": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Network/networkSecurityGroups')]",
+            "Microsoft.Network/publicIPAddresses": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Network/publicIPAddresses')]",
+            "Microsoft.Network/privateEndpoints": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Network/privateEndpoints')]",
+            "Microsoft.Storage/storageAccounts": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Storage/storageAccounts')]",
+            "Microsoft.KeyVault/vaults": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.KeyVault/vaults')]",
+            "Microsoft.Network/virtualNetworks": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Network/virtualNetworks')]",
+            "Microsoft.Compute/virtualMachines": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Compute/virtualMachines')]",
+            "Virtual machine extension": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Virtual machine extension')]",
+            "Microsoft.Resources/deploymentScripts": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.Resources/deploymentScripts')]",
+            "Microsoft.ManagedIdentity/userAssignedIdentities": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft.ManagedIdentity/userAssignedIdentities')]",
+            "Microsoft resources deployment": "[funcTags.tagsFilter(parameters('tagsByResource'), 'Microsoft resources deployment')]"
         }
     },
     "functions": [
@@ -574,10 +574,10 @@
     ],
     "resources": [
         {
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "name": "${cluster.start}",
+            "apiVersion": "2023-07-01",
+            "name": "pid-7363cd91-937d-4469-a7a8-ecbeddfb7a0f-partnercenter",
             "type": "Microsoft.Resources/deployments",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "properties": {
                 "mode": "Incremental",
                 "template": {
@@ -589,9 +589,9 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "${azure.apiVersionForDeployment}",
+            "apiVersion": "2023-07-01",
             "name": "[variables('name_clusterTemplate')]",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "condition": "[not(parameters('enableCustomSSL'))]",
             "properties": {
                 "mode": "Incremental",
@@ -707,8 +707,8 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "apiVersion": "2023-07-01",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "name": "[variables('name_clusterCustomSSLTemplate')]",
             "condition": "[parameters('enableCustomSSL')]",
             "properties": {
@@ -852,8 +852,8 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "apiVersion": "2023-07-01",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "name": "keyVaultwithSelfSignedAppGatewaySSLCert",
             "condition": "[and(parameters('enableAppGateway'), equals(parameters('appGatewayCertificateOption'), variables('const_appGatewaySSLCertOptionGenerateCert')))]",
             "dependsOn": [
@@ -892,8 +892,8 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "apiVersion": "2023-07-01",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "condition": "[equals(parameters('virtualNetworkNewOrExisting'), 'new')]",
             "name": "networkSecurityLinkedTemplate",
             "properties": {
@@ -923,8 +923,8 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "apiVersion": "2023-07-01",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "name": "appGatewayLinkedTemplate",
             "condition": "[parameters('enableAppGateway')]",
             "properties": {
@@ -953,10 +953,10 @@
                         "value": "[parameters('appGatewaySSLBackendCertData')]"
                     },
                     "autoGeneratedSSLCertKeyVaultName": {
-                        "value": "[if(equals(parameters('appGatewayCertificateOption'), variables('const_appGatewaySSLCertOptionGenerateCert')), reference('keyVaultwithSelfSignedAppGatewaySSLCert', '${azure.apiVersionForDeployment}').outputs.keyvaultName.value, '')]"
+                        "value": "[if(equals(parameters('appGatewayCertificateOption'), variables('const_appGatewaySSLCertOptionGenerateCert')), reference('keyVaultwithSelfSignedAppGatewaySSLCert', '2023-07-01').outputs.keyvaultName.value, '')]"
                     },
                     "autoGeneratedSSLCertSecretName": {
-                        "value": "[if(equals(parameters('appGatewayCertificateOption'), variables('const_appGatewaySSLCertOptionGenerateCert')), reference('keyVaultwithSelfSignedAppGatewaySSLCert', '${azure.apiVersionForDeployment}').outputs.secretName.value, '')]"
+                        "value": "[if(equals(parameters('appGatewayCertificateOption'), variables('const_appGatewaySSLCertOptionGenerateCert')), reference('keyVaultwithSelfSignedAppGatewaySSLCert', '2023-07-01').outputs.secretName.value, '')]"
                     },
                     "customDomainNameforApplicationGateway": {
                         "value": "[format('{0}.{1}', parameters('dnszoneAppGatewayLabel'), parameters('dnszoneName'))]"
@@ -1024,8 +1024,8 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "apiVersion": "2023-07-01",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "name": "dnszonesLinkedTemplate",
             "condition": "[parameters('enableDNSConfiguration')]",
             "dependsOn": [
@@ -1053,7 +1053,7 @@
                         ]
                     },
                     "dnszonesCNAMEAlias": {
-                        "value": "[if(parameters('enableAppGateway'), createArray(reference('appGatewayLinkedTemplate', '${azure.apiVersionForDeployment}').outputs.appGatewayAlias.value), createArray())]"
+                        "value": "[if(parameters('enableAppGateway'), createArray(reference('appGatewayLinkedTemplate', '2023-07-01').outputs.appGatewayAlias.value), createArray())]"
                     },
                     "dnszonesCNAMERecordSetNames": {
                         "value": "[if(parameters('enableAppGateway'), createArray(parameters('dnszoneAppGatewayLabel')), createArray())]"
@@ -1072,7 +1072,7 @@
                     },
                     "targetResources": {
                         "value": [
-                            "[reference(variables('clusterTemplateRef'), '${azure.apiVersionForDeployment}').outputs._adminPublicIPId.value]"
+                            "[reference(variables('clusterTemplateRef'), '2023-07-01').outputs._adminPublicIPId.value]"
                         ]
                     },
                     "tagsByResource": {
@@ -1083,8 +1083,8 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "apiVersion": "2023-07-01",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "name": "dbLinkedTemplate",
             "condition": "[parameters('enableDB')]",
             "dependsOn": [
@@ -1160,11 +1160,11 @@
         {
             "name": "coherenceTemplate",
             "type": "Microsoft.Resources/deployments",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', 'dbLinkedTemplate')]"
             ],
-            "apiVersion": "${azure.apiVersionForDeployment}",
+            "apiVersion": "2023-07-01",
             "condition": "[and(parameters('enableCoherence'),not(parameters('enableCustomSSL')))]",
             "properties": {
                 "mode": "Incremental",
@@ -1216,7 +1216,7 @@
                         "value": "[parameters('skuUrnVersion')]"
                     },
                     "storageAccountName": {
-                        "value": "[reference(variables('clusterTemplateRef'), '${azure.apiVersionForDeployment}').outputs.storageAccountName.value]"
+                        "value": "[reference(variables('clusterTemplateRef'), '2023-07-01').outputs.storageAccountName.value]"
                     },
                     "subnetName": {
                         "value": "[parameters('subnetName')]"
@@ -1260,11 +1260,11 @@
         {
             "name": "coherenceTemplateWithCustomSSL",
             "type": "Microsoft.Resources/deployments",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', 'dbLinkedTemplate')]"
             ],
-            "apiVersion": "${azure.apiVersionForDeployment}",
+            "apiVersion": "2023-07-01",
             "condition": "[and(parameters('enableCoherence'),parameters('enableCustomSSL'))]",
             "properties": {
                 "mode": "Incremental",
@@ -1316,7 +1316,7 @@
                         "value": "[parameters('skuUrnVersion')]"
                     },
                     "storageAccountName": {
-                        "value": "[reference(variables('clusterTemplateRef'), '${azure.apiVersionForDeployment}').outputs.storageAccountName.value]"
+                        "value": "[reference(variables('clusterTemplateRef'), '2023-07-01').outputs.storageAccountName.value]"
                     },
                     "subnetName": {
                         "value": "[parameters('subnetName')]"
@@ -1382,10 +1382,10 @@
             }
         },
         {
-            "apiVersion": "${azure.apiVersionForDeployment}",
-            "name": "${cluster.end}",
+            "apiVersion": "2023-07-01",
+            "name": "0fa14086-2d46-54a4-8aba-470addc3dce6",
             "type": "Microsoft.Resources/deployments",
-            "tags": "[variables('obj_tagsByResources')['${identifier.resourcesDeployment}']]",
+            "tags": "[variables('obj_tagsByResources')['Microsoft resources deployment']]",
             "dependsOn": [
                 "[resourceId('Microsoft.Resources/deployments', variables('clusterTemplateRef'))]",
                 "[resourceId('Microsoft.Resources/deployments', 'keyVaultwithSelfSignedAppGatewaySSLCert')]",
@@ -1416,27 +1416,27 @@
         },
         "wlsDomainLocation": {
             "type": "string",
-            "value": "[reference(variables('clusterTemplateRef'), '${azure.apiVersionForDeployment}').outputs.wlsDomainLocation.value]"
+            "value": "[reference(variables('clusterTemplateRef'), '2023-07-01').outputs.wlsDomainLocation.value]"
         },
         "adminHostName": {
             "type": "string",
-            "value": "[reference(variables('clusterTemplateRef'), '${azure.apiVersionForDeployment}').outputs.adminHostName.value]"
+            "value": "[reference(variables('clusterTemplateRef'), '2023-07-01').outputs.adminHostName.value]"
         },
         "adminConsole": {
             "type": "string",
-            "value": "[if(parameters('enableDNSConfiguration'), uri(format('http://{0}.{1}:7001/console/', parameters('dnszoneAdminConsoleLabel'), parameters('dnszoneName')), ''),reference(variables('clusterTemplateRef'), '${azure.apiVersionForDeployment}').outputs.adminConsole.value)]"
+            "value": "[if(parameters('enableDNSConfiguration'), uri(format('http://{0}.{1}:7001/console/', parameters('dnszoneAdminConsoleLabel'), parameters('dnszoneName')), ''),reference(variables('clusterTemplateRef'), '2023-07-01').outputs.adminConsole.value)]"
         },
         "adminSecuredConsole": {
             "type": "string",
-            "value": "[if(parameters('enableDNSConfiguration'), uri(format('https://{0}.{1}:7002/console/', parameters('dnszoneAdminConsoleLabel'), parameters('dnszoneName')), ''),reference(variables('clusterTemplateRef'), '${azure.apiVersionForDeployment}').outputs.adminSecuredConsole.value)]"
+            "value": "[if(parameters('enableDNSConfiguration'), uri(format('https://{0}.{1}:7002/console/', parameters('dnszoneAdminConsoleLabel'), parameters('dnszoneName')), ''),reference(variables('clusterTemplateRef'), '2023-07-01').outputs.adminSecuredConsole.value)]"
         },
         "appGatewayURL": {
             "type": "string",
-            "value": "[if(parameters('enableAppGateway'), if(parameters('enableDNSConfiguration'), uri(concat('http://',parameters('dnszoneAppGatewayLabel'),'.',parameters('dnszoneName')),''), reference('appGatewayLinkedTemplate', '${azure.apiVersionForDeployment}').outputs.appGatewayURL.value),'')]"
+            "value": "[if(parameters('enableAppGateway'), if(parameters('enableDNSConfiguration'), uri(concat('http://',parameters('dnszoneAppGatewayLabel'),'.',parameters('dnszoneName')),''), reference('appGatewayLinkedTemplate', '2023-07-01').outputs.appGatewayURL.value),'')]"
         },
         "appGatewaySecuredURL": {
             "type": "string",
-            "value": "[if(parameters('enableAppGateway'), if(parameters('enableDNSConfiguration'), uri(concat('https://',parameters('dnszoneAppGatewayLabel'),'.',parameters('dnszoneName')),''), reference('appGatewayLinkedTemplate', '${azure.apiVersionForDeployment}').outputs.appGatewaySecuredURL.value),'')]"
+            "value": "[if(parameters('enableAppGateway'), if(parameters('enableDNSConfiguration'), uri(concat('https://',parameters('dnszoneAppGatewayLabel'),'.',parameters('dnszoneName')),''), reference('appGatewayLinkedTemplate', '2023-07-01').outputs.appGatewaySecuredURL.value),'')]"
         }
     }
 }
