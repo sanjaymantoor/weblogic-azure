@@ -528,7 +528,8 @@
             },
             "kind": "StorageV2",
             "properties": {
-                "supportsHttpsTrafficOnly": false
+                "supportsHttpsTrafficOnly": false,
+				"minimumTlsVersion": "TLS1_2"
             },
             "dependsOn": [
                 "[parameters('nsgName')]"
